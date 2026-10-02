@@ -84,14 +84,31 @@ export default function HeroExperience() {
       mm.add({ desktop: MQ.desktop, mobile: MQ.mobile, reduce: MQ.reduce }, (ctx) => {
         const { desktop, reduce } = ctx.conditions;
 
-        // Reduced motion: la foto de la muñeca, estática. Sin scroll-jacking.
-        if (reduce) {
-          const place = () => measure();
-          window.addEventListener('resize', place);
-          return () => window.removeEventListener('resize', place);
-        }
-
         ScrollTrigger.addEventListener('refreshInit', measure);
+
+        // Reduced motion: la misma narrativa al hacer scroll, pero SOLO con fundidos
+        // de opacidad (sin zoom, desplazamiento ni giro): muñeca → reloj aislado → ficha.
+        if (reduce) {
+          const rtl = gsap.timeline({
+            defaults: { ease: 'none' },
+            scrollTrigger: {
+              trigger: q('.hero__track')[0],
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+          rtl
+            .to(q('.hero__copy > *'), { autoAlpha: 0, duration: 1 }, 0)
+            // fundidos en secuencia (casi sin solaparse) para no superponer dos relojes en posiciones distintas
+            .fromTo(camera, { autoAlpha: 1 }, { autoAlpha: 0, duration: 1.6 }, 1)
+            .fromTo(watchEl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.5 }, 2.4)
+            .fromTo(q('.hero__caption'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 1 }, 3.6)
+            .to({}, { duration: 1 });
+
+          return () => ScrollTrigger.removeEventListener('refreshInit', measure);
+        }
 
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
@@ -136,6 +153,7 @@ export default function HeroExperience() {
           .fromTo(q('.hero__caption'), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: 'power2.out' }, 7.2)
           .fromTo(q('.hero__progress-bar'), { scaleX: 0 }, { scaleX: 1, duration: 9.5 }, 0)
           .to({}, { duration: 1.2 });
+
 
         return () => ScrollTrigger.removeEventListener('refreshInit', measure);
       });

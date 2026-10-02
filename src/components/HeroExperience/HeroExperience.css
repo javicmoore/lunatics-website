@@ -23,9 +23,11 @@
   }
 }
 
+/* Reduced motion: track más corto; la secuencia se resuelve solo con fundidos */
 @media (prefers-reduced-motion: reduce) {
   .hero__track {
-    height: auto;
+    height: 180vh;
+    height: 180svh;
   }
 }
 
