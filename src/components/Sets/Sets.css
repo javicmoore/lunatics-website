@@ -1,0 +1,271 @@
+.sets__head {
+  margin-bottom: clamp(40px, 7vw, 88px);
+}
+
+/* --------------------------------------------------------------------------
+   Composición flat-lay: superficie oscura, piezas con sombra suave
+   -------------------------------------------------------------------------- */
+.set-comp {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3.4;
+  background:
+    radial-gradient(70% 60% at 55% 45%, #1f2226 0%, #121316 55%, #0a0b0c 100%);
+  isolation: isolate;
+}
+
+.set-comp::after {
+  /* textura de superficie */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/texture/grain.png') repeat;
+  background-size: 160px;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.set-comp--featured {
+  aspect-ratio: 4 / 4.2;
+}
+
+.set-piece {
+  position: absolute;
+}
+
+.set-piece picture,
+.set-piece img,
+.set-piece .product-art {
+  width: 100%;
+  height: 100%;
+}
+
+.set-piece img {
+  object-fit: contain;
+}
+
+/* Sombra de contacto (sin filtros: elipse difusa detrás de cada pieza) */
+.set-piece::before {
+  content: '';
+  position: absolute;
+  inset: 20% 12% 6%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.55), transparent);
+  transform: translate(4%, 6%);
+  z-index: -1;
+}
+
+/* Set Noche (destacado) */
+.set-piece--watch {
+  width: 46%;
+  aspect-ratio: 1086 / 1448;
+  left: 40%;
+  top: 6%;
+  transform: rotate(-14deg);
+}
+
+.set-piece--chain {
+  width: 56%;
+  aspect-ratio: 4 / 5;
+  left: 2%;
+  top: 4%;
+  transform: rotate(18deg);
+  opacity: 0.9;
+}
+
+.set-piece--bracelet {
+  width: 44%;
+  aspect-ratio: 4 / 5;
+  left: 8%;
+  top: 46%;
+  transform: rotate(-8deg);
+}
+
+/* Sets secundarios */
+.set-piece--watch-sm {
+  width: 50%;
+  aspect-ratio: 4 / 5;
+  left: 44%;
+  top: 8%;
+  transform: rotate(-10deg);
+}
+
+.set-piece--chain-sm {
+  width: 54%;
+  aspect-ratio: 4 / 5;
+  left: 4%;
+  top: 6%;
+  transform: rotate(14deg);
+  opacity: 0.85;
+}
+
+.set-piece--pendant {
+  width: 38%;
+  aspect-ratio: 4 / 5;
+  left: 24%;
+  top: 30%;
+  transform: rotate(-6deg);
+}
+
+/* Lista de piezas con "+" */
+.set-items {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.set-items li {
+  display: grid;
+  grid-template-columns: 22px 72px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
+
+.set-items li:first-child {
+  padding-left: 0;
+}
+
+.set-items li:first-child .set-items__type {
+  grid-column: 2;
+}
+
+.set-items__plus {
+  color: var(--blue-text);
+  font-weight: 600;
+}
+
+.set-items__type {
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.set-items__name {
+  color: var(--silver);
+  min-width: 0;
+}
+
+.set-price {
+  display: grid;
+  font-size: 1.375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.set-price small {
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.set-price__label {
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* Set destacado */
+.set-feature {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+  margin-bottom: clamp(64px, 9vw, 120px);
+}
+
+.set-feature__info {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  min-width: 0;
+}
+
+.set-feature__name,
+.set-card__name {
+  display: grid;
+  gap: 4px;
+  font-weight: 400;
+}
+
+.set-feature__name .display {
+  font-size: clamp(2.25rem, 9vw, 4rem);
+}
+
+.set-feature__name .serif,
+.set-card__name .serif {
+  font-size: clamp(1.25rem, 4.6vw, 1.75rem);
+  line-height: 1.15;
+  color: var(--silver);
+}
+
+.set-feature__buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+/* Sets secundarios */
+.sets__grid {
+  display: grid;
+  align-items: start;
+  gap: 56px;
+}
+
+.set-card {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+
+.set-card__body {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.set-card__name .display {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+}
+
+.set-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.set-card__foot .set-price {
+  font-size: 1.125rem;
+}
+
+@media (min-width: 768px) {
+  .sets__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .set-feature {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    align-items: center;
+    gap: clamp(48px, 7vw, 120px);
+  }
+
+  .set-feature__info {
+    max-width: 460px;
+  }
+
+  .sets__grid {
+    gap: clamp(32px, 4vw, 64px);
+  }
+
+  .sets__grid > :nth-child(2) {
+    margin-top: 96px;
+  }
+}

@@ -1,0 +1,153 @@
+.watches {
+  padding-top: clamp(72px, 10vw, 140px);
+}
+
+.watches__head {
+  margin-bottom: clamp(40px, 7vw, 88px);
+}
+
+/* Pieza protagonista: foto grande + ficha */
+.watches__feature {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+  margin-bottom: clamp(64px, 10vw, 140px);
+}
+
+.watches__feature-media {
+  aspect-ratio: 4 / 4.4;
+  background:
+    radial-gradient(60% 50% at 50% 46%, rgba(31, 111, 255, 0.07), transparent 70%),
+    radial-gradient(85% 70% at 50% 40%, #1c1f23 0%, #0f1012 60%, #0a0b0c 100%);
+}
+
+.watches__feature-media .product-media__picture img {
+  padding: 7% 12%;
+}
+
+.watches__feature-info {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  min-width: 0;
+}
+
+.watches__feature-brand {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 8px;
+}
+
+.watches__feature-name {
+  display: grid;
+  font-weight: 400;
+}
+
+.watches__feature-name .display {
+  font-size: clamp(2.25rem, 9vw, 4rem);
+}
+
+.watches__feature-name .serif {
+  font-size: clamp(1.75rem, 6.5vw, 2.75rem);
+  line-height: 1.05;
+  color: var(--blue-text);
+}
+
+.watches__specs {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.watches__specs li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+  color: var(--silver);
+}
+
+.watches__specs li::before {
+  content: '';
+  flex: none;
+  width: 14px;
+  height: 1px;
+  background: var(--steel);
+}
+
+.watches__feature-price {
+  font-size: 1.375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.watches__feature-price span {
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.watches__feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+}
+
+.watches__feature-actions .btn {
+  flex: 1 1 100%;
+}
+
+/* Grid editorial */
+.watches__grid {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 14px;
+}
+
+@media (min-width: 560px) {
+  .watches__feature-actions .btn {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .watches__grid {
+    gap: 56px 24px;
+  }
+
+  .watches__feature {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+  }
+
+  .watches__feature-media {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (min-width: 1024px) {
+  .watches__feature {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(48px, 7vw, 120px);
+  }
+
+  .watches__feature-info {
+    max-width: 440px;
+  }
+
+  .watches__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  /* Ritmo editorial: columnas pares desplazadas */
+  .watches__grid > :nth-child(even) {
+    margin-top: 72px;
+  }
+}

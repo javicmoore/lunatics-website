@@ -1,0 +1,322 @@
+/* ==========================================================================
+   Lunatic's — tokens y base. Mobile-first: los estilos base son para 320 px+
+   y se amplían con min-width (768, 1024, 1440).
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --ink: #08090a;
+  --carbon: #0f1012;
+  --carbon-2: #16181b;
+  --carbon-3: #1e2125;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --steel: #9ea3aa;
+  --silver: #d6d9de;
+  --white: #f3f4f5;
+  --muted: #868b92;
+  --blue: #1f6fff; /* acento: se usa poco y con intención */
+  --blue-text: #5b97ff; /* variante legible para texto sobre negro */
+  --blue-glow: rgba(31, 111, 255, 0.28);
+
+  /* Tipografía */
+  --font-sans: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Archivo Narrow', 'Archivo Variable', 'Arial Narrow', sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+
+  --fs-label: 0.6875rem; /* 11px */
+  --fs-small: 0.8125rem; /* 13px */
+  --fs-body: 1rem;
+  --fs-lead: clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);
+  --fs-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --fs-h2: clamp(2rem, 1.35rem + 3.2vw, 4rem);
+
+  /* Espaciado y layout */
+  --gutter: clamp(16px, 4.5vw, 56px);
+  --maxw: 1440px;
+  --section-y: clamp(88px, 12vw, 176px);
+  --header-h: 64px;
+  --radius: 2px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 76px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--ink);
+  color-scheme: dark;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip; /* red de seguridad; el layout no debe depender de esto */
+}
+
+img,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   Utilidades
+   -------------------------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform 0.2s;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+/* Etiqueta pequeña tipo índice editorial: "01 — Relojes" */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.label__index {
+  color: var(--blue-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.label__rule {
+  width: 28px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+/* Títulos de sección: condensados, mayúsculas, tamaño contenido */
+.display {
+  /* Fuente condensada estática: el eje variable de ancho no se renderiza igual en todos los WebKit */
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Botones */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  transition:
+    border-color 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  border-color: var(--blue);
+}
+
+.btn--solid {
+  background: var(--white);
+  color: var(--ink);
+  border-color: var(--white);
+}
+
+.btn--solid:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.btn__arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+/* Link de texto con subrayado que crece (azul) */
+.text-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: var(--blue);
+  transform: scaleX(0.28);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.text-link:hover::after,
+.text-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Grano fotográfico estático */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/images/texture/grain.png') repeat;
+  background-size: 160px;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+/* Revelado suave de contenido (lo activa GSAP; sin JS/reduced motion queda visible) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
